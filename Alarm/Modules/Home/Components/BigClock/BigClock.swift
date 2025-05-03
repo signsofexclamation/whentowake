@@ -27,7 +27,7 @@ struct BigClock: View {
     var body: some View {
         HStack(spacing: 8.0) {
             ForEach(self.digits) { digit in
-                Image("Clock/\(digit.digit)")
+                Image("clock/\(digit.digit)")
                     .resizable()
             }
         }

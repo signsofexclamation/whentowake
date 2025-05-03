@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-    @State private var alarms: [Alarm] = []
+    @State private var isShortcutPromptPresented: Bool = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             TimelineView(.everyMinute) { context in
                 VStack(spacing: 32.0) {
                     BigClock(for: context.date)
@@ -23,10 +23,10 @@ struct HomeView: View {
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         VStack {
-                            Image(.logoSmall)
+                            Image(.Logo.default)
                             Text("alarm")
                                 .font(.timesNewRoman(size: 12.0))
-                                .tracking(4.0)
+                                .tracking(.spacedTracking)
                         }
                         .padding(.top, 16.0)
                     }
@@ -35,16 +35,21 @@ struct HomeView: View {
                         Button("about") {
                             
                         }
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                         .font(.timesNewRoman(size: 12.0))
-                        .tracking(4.0)
+                        .tracking(.spacedTracking)
                         .padding(.top, 16.0)
                     }
                 }
             }
         }
         .onAppear {
-            self.alarms = Alarm.options(for: .now)
+            if !Settings.isShortcutSet {
+                self.isShortcutPromptPresented = true
+            }
+        }
+        .fullScreenCover(isPresented: self.$isShortcutPromptPresented) {
+            ShortcutPrompt(isPresented: self.$isShortcutPromptPresented)
         }
     }
 }

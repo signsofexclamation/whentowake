@@ -9,30 +9,32 @@ import Foundation
 
 struct Sleep: Identifiable, Hashable {
     let cycles: Int
-    let info: String
     let duration: Int
+    let description: String
+    let details: String
     
     var id: Int {
         return self.hashValue
     }
     
-    init(cycles: Int, info: String) {
+    init(cycles: Int, description: String) {
         self.cycles = cycles
-        self.info = info
         self.duration = cycles * 90
+        self.description = description
+        self.details = "\(cycles.spelled) sleep cycles. \(Double(self.duration) / 60.0) hrs of sleep."
     }
 }
 
 extension Sleep {
     static var minimal: Sleep {
-        return .init(cycles: 4, info: "minimal")
+        return .init(cycles: 4, description: "minimal")
     }
     
     static var medium: Sleep {
-        return .init(cycles: 5, info: "medium")
+        return .init(cycles: 5, description: "medium")
     }
     
     static var best: Sleep {
-        return .init(cycles: 6, info: "best")
+        return .init(cycles: 6, description: "best")
     }
 }
