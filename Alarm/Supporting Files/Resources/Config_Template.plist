@@ -4,5 +4,9 @@
 <dict>
 	<key>SHORTCUT_URL</key>
 	<string></string>
+	<key>SOURCE_CODE_URL</key>
+	<string></string>
+	<key>WEBSITE_URL</key>
+	<string></string>
 </dict>
 </plist>

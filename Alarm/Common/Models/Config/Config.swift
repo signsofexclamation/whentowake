@@ -10,6 +10,8 @@ import Foundation
 struct Config: Decodable {
     enum CodingKeys: String, CodingKey {
         case shortcutURL = "SHORTCUT_URL"
+        case sourceCodeURL = "SOURCE_CODE_URL"
+        case websiteURL = "WEBSITE_URL"
     }
     
     enum Error: LocalizedError {
@@ -24,6 +26,12 @@ struct Config: Decodable {
     }
     
     let shortcutURL: String
+    let sourceCodeURL: String
+    let websiteURL: String
+    
+    var appVersion: String {
+        return (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+    }
     
     static let standard: Config = {
         do {

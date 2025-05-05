@@ -6,10 +6,41 @@
 //
 
 import SwiftUI
-import SwiftData
+import UIKit
 
 @main
 struct AlarmApp: App {
+    init() {
+        let navBarAppearance = UINavigationBarAppearance()
+        
+        navBarAppearance.configureWithTransparentBackground()
+        navBarAppearance.titleTextAttributes = [
+            .font: UIFont(name: "TimesNewRomanPSMT", size: 16.0) as Any,
+            .tracking: CGFloat.spacedTracking
+        ]
+        
+        let backButtonIcon = UIImage(resource: .Icon.back)
+        let barButtonAppearance = UIBarButtonItemAppearance(style: .plain)
+        let clearAppearance: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.clear]
+        
+        barButtonAppearance.normal.titleTextAttributes = clearAppearance
+        barButtonAppearance.disabled.titleTextAttributes = clearAppearance
+        barButtonAppearance.focused.titleTextAttributes = clearAppearance
+        barButtonAppearance.highlighted.titleTextAttributes = clearAppearance
+        
+        navBarAppearance.buttonAppearance = barButtonAppearance
+        navBarAppearance.backButtonAppearance = barButtonAppearance
+        navBarAppearance.doneButtonAppearance = barButtonAppearance
+        navBarAppearance.setBackIndicatorImage(backButtonIcon, transitionMaskImage: backButtonIcon)
+        
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactScrollEdgeAppearance = navBarAppearance
+        
+        UIBarButtonItem.appearance().tintColor = .accent
+    }
+    
     var body: some Scene {
         WindowGroup {
             HomeView()

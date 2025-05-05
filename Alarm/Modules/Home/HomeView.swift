@@ -10,6 +10,7 @@ import SwiftData
 
 struct HomeView: View {
     @State private var isShortcutPromptPresented: Bool = false
+    @State private var isMoreViewPresented: Bool = false
     
     var body: some View {
         NavigationView {
@@ -32,8 +33,8 @@ struct HomeView: View {
                     }
                     
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button("about") {
-                            
+                        Button("more") {
+                            self.isMoreViewPresented = true
                         }
                         .foregroundStyle(.primary)
                         .font(.timesNewRoman(size: 12.0))
@@ -50,6 +51,9 @@ struct HomeView: View {
         }
         .fullScreenCover(isPresented: self.$isShortcutPromptPresented) {
             ShortcutPrompt(isPresented: self.$isShortcutPromptPresented)
+        }
+        .sheet(isPresented: self.$isMoreViewPresented) {
+            MoreView(isPresented: self.$isMoreViewPresented)
         }
     }
 }
