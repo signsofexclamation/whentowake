@@ -18,7 +18,7 @@ struct MoreView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 ScrollView {
-                    VStack(spacing: 8.0) {
+                    VStack(spacing: 0.0) {
                         NavigationLink {
                             AboutAppView()
                         } label: {
@@ -38,10 +38,9 @@ struct MoreView: View {
                 
                 VStack(alignment: .leading) {
                     Text("version \(Config.standard.appVersion)")
-                    Text("three signs of exclamation.")
+                    Text("signs of exclamation.")
                 }
                 .font(.timesNewRoman(size: 14.0))
-                .tracking(.spacedTracking)
                 .foregroundStyle(.secondary)
                 .padding([.horizontal, .bottom], 16.0)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -52,8 +51,8 @@ struct MoreView: View {
                     Image(.Logo.default)
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("[x]") {
+                ToolbarItem(placement: .navigation) {
+                    Button("", systemImage: "xmark") {
                         self.isPresented = false
                     }
                     .font(.timesNewRoman(size: 18.0))

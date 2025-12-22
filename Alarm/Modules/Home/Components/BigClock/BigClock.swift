@@ -29,6 +29,7 @@ struct BigClock: View {
             ForEach(self.digits) { digit in
                 Image("clock/\(digit.digit)")
                     .resizable()
+                    .renderingMode(.template)
             }
         }
     }

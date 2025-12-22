@@ -18,7 +18,6 @@ struct ListItem: View {
         HStack(spacing: 16.0) {
             Text(self.title)
                 .font(.timesNewRoman(size: 16.0))
-                .tracking(.spacedTracking)
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
             

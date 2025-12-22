@@ -6,15 +6,10 @@
 //
 
 import Foundation
+import AlarmKit
 
 enum Settings {
-    static var isShortcutSet: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: "isShortcutSet")
-        }
-        
-        set {
-            UserDefaults.standard.set(newValue, forKey: "isShortcutSet")
-        }
+    static var isAlarmAuthorized: Bool {
+        return AlarmManager.shared.authorizationState == .authorized
     }
 }

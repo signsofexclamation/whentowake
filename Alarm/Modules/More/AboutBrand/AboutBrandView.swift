@@ -18,7 +18,6 @@ struct AboutBrandView: View {
                     
                     Text("!!! is a direct extension of who i am, just without my name on it. its about translating my ideas, emotions, and aesthetics into something tangible—something that people who connect with it can wear, experience, and be a part of.")
                         .font(.timesNewRoman(size: 16.0))
-                        .tracking(.condensedTracking)
                 }
                 .padding(16.0)
             }

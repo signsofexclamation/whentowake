@@ -1,39 +1,37 @@
-//
-//  Alarm.swift
-//  Alarm
-//
-//  Created by Tamerlan Satualdypov on 01.05.2025.
-//
-
-import Foundation
-import SwiftData
-
-struct Alarm: Identifiable, Hashable {
-    let date: Date
-    let sleep: Sleep
-    
-    var id: Int {
-        return self.hashValue
-    }
-    
-    init(date: Date, sleep: Sleep) {
-        self.date = date
-        self.sleep = sleep
-    }
-}
+import AlarmKit
 
 extension Alarm {
-    static func options(for date: Date) -> [Alarm] {
-        let sleepStartDate = date.adding(.minute, value: 15) ?? date + 15 * 60
-        let sleepOptions: [Sleep] = [.minimal, .medium, .best]
+    static var all: [Alarm] {
+        return (try? AlarmManager.shared.alarms) ?? []
+    }
+    
+    static func schedule(option: AlarmOption) async throws -> Alarm {
+        let alert: AlarmPresentation = AlarmPresentation(
+            alert: .init(
+                title: "wake up",
+                stopButton: AlarmButton(
+                    text: "stop",
+                    textColor: .primary,
+                    systemImageName: "stop"
+                )
+            )
+        )
         
-        var alarmOptions: [Alarm] = []
+        let attributes: AlarmAttributes<EmptyAlarmMetadata> = .init(
+            presentation: alert,
+            tintColor: .primary
+        )
         
-        for sleep in sleepOptions {
-            let wakeupDate = sleepStartDate.adding(.minute, value: sleep.duration) ?? sleepStartDate + TimeInterval(sleep.duration * 60)
-            alarmOptions.append(.init(date: wakeupDate, sleep: sleep))
-        }
-        
-        return alarmOptions
+        return try await AlarmManager.shared.schedule(
+            id: option.id,
+            configuration: .alarm(
+                schedule: .fixed(option.date),
+                attributes: attributes
+            )
+        )
+    }
+    
+    func cancel() throws {
+        try AlarmManager.shared.cancel(id: self.id)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ShortcutPrompt.swift
+//  AlarmAuthorizationPrompt.swift
 //  Alarm
 //
 //  Created by Tamerlan Satualdypov on 03.05.2025.
@@ -7,11 +7,8 @@
 
 import SwiftUI
 
-struct ShortcutPrompt: View {
-    @State private var isExplanationSheetPresented: Bool = false
+struct AlarmAuthorizationPrompt: View {
     @Binding private var isPresented: Bool
-    
-    @Environment(\.openURL) private var openURL: OpenURLAction
     
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
@@ -29,35 +26,25 @@ struct ShortcutPrompt: View {
                         Text("set alarms through app.")
                             .font(.timesNewRoman(size: 24.0))
                         
-                        Text("adding the shortcut enables direct alarm creation from suggested times. takes a few seconds to install.")
+                        Text("the app uses alarms only to wake you up at the time you set, ensuring you do not miss your planned wake-up.")
                             .font(.timesNewRoman(size: 18.0))
                     }
-                    .tracking(.condensedTracking)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
                 
                 VStack(spacing: 16.0) {
-                    Button("add shortcut") {
-                        if let url = URL(string: Config.standard.shortcutURL) {
-                            openURL(url) { accepted in
-                                Settings.isShortcutSet = accepted
-                            }
-                        }
+                    Button("allow alarms") {
+                        print("system permission prompt")
                     }
                     .buttonStyle(.primary)
-                    
-                    Button("why?") {
-                        self.isExplanationSheetPresented = true
-                    }
-                    .buttonStyle(.secondary)
                 }
             }
             .padding(.vertical, 32.0)
             .padding(.horizontal, 16.0)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("[x]") {
+                    Button("", systemImage: "xmark") {
                         self.isPresented = false
                     }
                     .font(.timesNewRoman(size: 18.0))
@@ -65,14 +52,9 @@ struct ShortcutPrompt: View {
                 }
             }
         }
-        .sheet(isPresented: self.$isExplanationSheetPresented) {
-            ShortcutExplanationSheet(isPresented: self.$isExplanationSheetPresented)
-                .presentationDetents([.height(400.0)])
-                .presentationDragIndicator(.visible)
-        }
     }
 }
 
 #Preview {
-    ShortcutPrompt(isPresented: .constant(true))
+    AlarmAuthorizationPrompt(isPresented: .constant(true))
 }

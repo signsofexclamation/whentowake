@@ -6,51 +6,47 @@
 //
 
 import SwiftUI
-import SwiftData
+import AlarmKit
 
 struct HomeView: View {
-    @State private var isShortcutPromptPresented: Bool = false
+    @State private var isAlarmAuthorizationPromptPresented: Bool = false
     @State private var isMoreViewPresented: Bool = false
+    @State private var alarms: [Alarm] = Alarm.all
     
     var body: some View {
         NavigationView {
             TimelineView(.everyMinute) { context in
                 VStack(spacing: 32.0) {
                     BigClock(for: context.date)
+                        .foregroundStyle(alarms.isEmpty ? .primary : .secondary)
+                    
                     AlarmList(for: context.date)
                         .padding(.horizontal, 16.0)
                 }
                 .padding(.bottom, 24.0)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        VStack {
-                            Image(.Logo.default)
-                            Text("alarm")
-                                .font(.timesNewRoman(size: 12.0))
-                                .tracking(.spacedTracking)
-                        }
-                        .padding(.top, 16.0)
+                        Image(.Logo.default)
                     }
                     
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button("more") {
+                        Button("", systemImage: "ellipsis") {
                             self.isMoreViewPresented = true
                         }
                         .foregroundStyle(.primary)
-                        .font(.timesNewRoman(size: 12.0))
+                        .font(.timesNewRoman(size: 14.0))
                         .tracking(.spacedTracking)
-                        .padding(.top, 16.0)
                     }
                 }
             }
         }
         .onAppear {
-            if !Settings.isShortcutSet {
-                self.isShortcutPromptPresented = true
+            if !Settings.isAlarmAuthorized {
+//                self.isAlarmAuthorizationPromptPresented = true
             }
         }
-        .fullScreenCover(isPresented: self.$isShortcutPromptPresented) {
-            ShortcutPrompt(isPresented: self.$isShortcutPromptPresented)
+        .fullScreenCover(isPresented: self.$isAlarmAuthorizationPromptPresented) {
+            AlarmAuthorizationPrompt(isPresented: self.$isAlarmAuthorizationPromptPresented)
         }
         .sheet(isPresented: self.$isMoreViewPresented) {
             MoreView(isPresented: self.$isMoreViewPresented)

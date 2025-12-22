@@ -9,16 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct AlarmList: View {
-    private let alarms: [Alarm]
+    private let alarmOptions: [AlarmOption]
     
     init(for date: Date) {
-        self.alarms = Alarm.options(for: date)
+        self.alarmOptions = AlarmOption.options(for: date)
     }
     
     var body: some View {
         VStack(spacing: 8.0) {
-            ForEach(self.alarms) { alarm in
-                AlarmOption(alarm: alarm)
+            ForEach(self.alarmOptions) { option in
+                AlarmOptionRow(option: option)
             }
         }
     }
