@@ -14,6 +14,11 @@ struct AlarmApp: App {
         let navBarAppearance = UINavigationBarAppearance()
         
         navBarAppearance.configureWithTransparentBackground()
+        
+        navBarAppearance.largeTitleTextAttributes = [
+            .font: UIFont(name: "TimesNewRomanPS-BoldMT", size: 36.0) as Any,
+        ]
+        
         navBarAppearance.titleTextAttributes = [
             .font: UIFont(name: "TimesNewRomanPSMT", size: 16.0) as Any,
             .tracking: CGFloat.spacedTracking
@@ -30,7 +35,7 @@ struct AlarmApp: App {
         
         navBarAppearance.buttonAppearance = barButtonAppearance
         navBarAppearance.backButtonAppearance = barButtonAppearance
-        navBarAppearance.doneButtonAppearance = barButtonAppearance
+        
         navBarAppearance.setBackIndicatorImage(backButtonIcon, transitionMaskImage: backButtonIcon)
         
         UINavigationBar.appearance().standardAppearance = navBarAppearance

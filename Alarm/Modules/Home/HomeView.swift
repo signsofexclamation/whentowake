@@ -9,16 +9,14 @@ import SwiftUI
 import AlarmKit
 
 struct HomeView: View {
-    @State private var isAlarmAuthorizationPromptPresented: Bool = false
-    @State private var isMoreViewPresented: Bool = false
-    @State private var alarms: [Alarm] = Alarm.all
+    @State private var isAboutViewPresented: Bool = false
     
     var body: some View {
         NavigationView {
             TimelineView(.everyMinute) { context in
                 VStack(spacing: 32.0) {
                     BigClock(for: context.date)
-                        .foregroundStyle(alarms.isEmpty ? .primary : .secondary)
+                        .foregroundStyle(.primary)
                     
                     AlarmList(for: context.date)
                         .padding(.horizontal, 16.0)
@@ -31,25 +29,15 @@ struct HomeView: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("", systemImage: "ellipsis") {
-                            self.isMoreViewPresented = true
+                            self.isAboutViewPresented = true
                         }
                         .foregroundStyle(.primary)
-                        .font(.timesNewRoman(size: 14.0))
-                        .tracking(.spacedTracking)
                     }
                 }
             }
         }
-        .onAppear {
-            if !Settings.isAlarmAuthorized {
-//                self.isAlarmAuthorizationPromptPresented = true
-            }
-        }
-        .fullScreenCover(isPresented: self.$isAlarmAuthorizationPromptPresented) {
-            AlarmAuthorizationPrompt(isPresented: self.$isAlarmAuthorizationPromptPresented)
-        }
-        .sheet(isPresented: self.$isMoreViewPresented) {
-            MoreView(isPresented: self.$isMoreViewPresented)
+        .sheet(isPresented: self.$isAboutViewPresented) {
+            AboutView(isPresented: self.$isAboutViewPresented)
         }
     }
 }

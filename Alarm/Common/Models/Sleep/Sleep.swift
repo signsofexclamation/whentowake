@@ -27,14 +27,14 @@ struct Sleep: Identifiable, Hashable {
 
 extension Sleep {
     static var minimal: Sleep {
-        return .init(cycles: 4, description: "minimal")
+        return .init(cycles: 4, description: "short")
     }
     
     static var medium: Sleep {
-        return .init(cycles: 5, description: "medium")
+        return .init(cycles: 5, description: "balanced")
     }
     
     static var best: Sleep {
-        return .init(cycles: 6, description: "best")
+        return .init(cycles: 6, description: "full")
     }
 }

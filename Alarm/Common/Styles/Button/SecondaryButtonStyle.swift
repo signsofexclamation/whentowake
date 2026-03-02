@@ -11,7 +11,6 @@ struct SecondaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.timesNewRoman(size: 14.0))
-            .tracking(.spacedTracking)
             .foregroundStyle(.primary)
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())

@@ -23,7 +23,7 @@ struct AlarmOption: Identifiable, Hashable {
 
 extension AlarmOption {
     static func options(for date: Date) -> [AlarmOption] {
-        let sleepStartDate = date.adding(.minute, value: 15) ?? date + 15 * 60
+        let sleepStartDate = date.adding(.minute, value: 15) ?? (date + 15 * 60)
         let sleepOptions: [Sleep] = [.minimal, .medium, .best]
         
         var alarmOptions: [AlarmOption] = []
@@ -34,9 +34,5 @@ extension AlarmOption {
         }
         
         return alarmOptions
-    }
-    
-    func scheduleAlarm() async throws {
-        
     }
 }
