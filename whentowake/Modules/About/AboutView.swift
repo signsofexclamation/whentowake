@@ -15,7 +15,7 @@ struct AboutView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16.0) {
                         Text("it started as a personal tool — something that helped avoid missing the ideal window to fall asleep. it does not create alarms and does not have fancy features. instead, it helps you find the best time to wake up, based on when you are using it.\n\nhumans sleep in cycles. usually four to six are needed to wake up feeling right. this app does the math and suggests wake times that align with those rhythms — so waking up feels less forced.\n\nsource code is open. app collects nothing.")
-                            .font(.timesNewRoman(size: 16.0))
+                            .font(.timesNewRoman(size: 18.0))
                         
                         VStack(alignment: .leading, spacing: 8.0) {
                             Button {
@@ -24,7 +24,7 @@ struct AboutView: View {
                                 }
                             } label: {
                                 Text("source code")
-                                    .font(.timesNewRoman(size: 16.0))
+                                    .font(.timesNewRoman(size: 18.0))
                                     .underline()
                                     .foregroundStyle(.link)
                             }
@@ -36,7 +36,7 @@ struct AboutView: View {
                                 }
                             } label: {
                                 Text("brand website")
-                                    .font(.timesNewRoman(size: 16.0))
+                                    .font(.timesNewRoman(size: 18.0))
                                     .underline()
                                     .foregroundStyle(.link)
                             }
@@ -55,7 +55,7 @@ struct AboutView: View {
                         Text("year \(Date.now.year).")
                     }
                 }
-                .font(.timesNewRoman(size: 14.0))
+                .font(.timesNewRoman(size: 16.0))
                 .foregroundStyle(.secondary)
                 .padding([.horizontal, .bottom], 16.0)
                 .frame(maxWidth: .infinity, alignment: .leading)
