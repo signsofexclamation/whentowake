@@ -2,11 +2,11 @@ import Foundation
 
 extension Date {
     var time: String {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: self)
-        let minutes = calendar.component(.minute, from: self)
-        
-        return String(format: "%02d:%02d", hour, minutes)
+        return self.formatted(
+            .dateTime
+                .hour(.twoDigits(amPM: .omitted))
+                .minute(.twoDigits)
+        )
     }
     
     var year: String {
