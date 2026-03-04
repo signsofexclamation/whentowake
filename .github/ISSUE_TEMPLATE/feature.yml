@@ -1,0 +1,17 @@
+name: feature request
+description: an idea or suggestion
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: what is the feature
+      description: describe your idea clearly
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: why does it belong in whentowake
+      description: whentowake does one thing. explain why this fits that philosophy
+    validations:
+      required: true

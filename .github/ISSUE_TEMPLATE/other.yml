@@ -1,0 +1,10 @@
+name: other
+description: anything else
+body:
+  - type: textarea
+    id: content
+    attributes:
+      label: description
+      description: anything that does not fit the other templates
+    validations:
+      required: true

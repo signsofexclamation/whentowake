@@ -1,0 +1,38 @@
+name: bug report
+description: something is not working
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: what happened
+      description: describe the bug clearly and concisely
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: what should have happened
+      description: what did you expect to see instead
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: steps to reproduce
+      description: how can we reproduce this bug consistently
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: app version
+      description: e.g. 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: device and ios version
+      description: e.g. iPhone 15, iOS 26.0
+    validations:
+      required: true
